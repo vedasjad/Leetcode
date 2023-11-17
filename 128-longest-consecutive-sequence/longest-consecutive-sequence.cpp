@@ -3,9 +3,8 @@ class Solution
     public:
         int longestConsecutive(vector<int> &nums)
         {
-            set<int> numsSet;
+            set<int> numsSet(nums.begin(), nums.end());
             int maxLength = 0, currLength = 0, lastNum = INT_MIN;
-            for (auto it: nums) numsSet.insert(it);
             for (auto it: numsSet)
             {
                 if (currLength == 0)
@@ -21,9 +20,8 @@ class Solution
                         maxLength = max(maxLength, currLength);
                     }
                     else
-                    {
+
                         currLength = 1;
-                    }
                 }
                 lastNum = it;
             }
