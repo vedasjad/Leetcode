@@ -18,11 +18,9 @@ class Solution
             {
                 for (int j = 0; j < 9; j++)
                 {
-                    char currentChar = board[i][j];
-                    if (currentChar != '.')
+                    if (board[i][j] != '.')
                     {
-                        auto currentBoxPos = boxes[i / 3 * 3 + j / 3].find(currentChar);
-                        if (rows[i].find(currentChar, j + 1) != string::npos || columns[j].find(currentChar, i + 1) != string::npos || boxes[i / 3 * 3 + j / 3].find(currentChar, currentBoxPos + 1) != string::npos)
+                        if (rows[i].find(board[i][j], j + 1) != string::npos || columns[j].find(board[i][j], i + 1) != string::npos || boxes[i / 3 * 3 + j / 3].find(board[i][j], boxes[i / 3 * 3 + j / 3].find(board[i][j]) + 1) != string::npos)
                         {
                             flag = false;
                             break;
