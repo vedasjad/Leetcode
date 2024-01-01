@@ -3,15 +3,13 @@ class Solution
     public:
         int reverse(int num)
         {
-            long rev = 0;
-            bool sign = num > 0 ? false : true;
-            num = abs(num);
-            while (num > 0)
+            int rev = 0;
+            while (num)
             {
-                if (INT_MAX < rev *10) return 0;
+                if (rev > INT_MAX / 10 || rev < INT_MIN / 10) return 0;
                 rev = rev *10 + num % 10;
-                num /= 10;
+                num = num / 10;
             }
-            return sign ? 0 - rev : rev;
+            return rev;
         }
 };
