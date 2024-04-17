@@ -10,26 +10,16 @@
 
 class Solution {
 public:
-    bool hasNode(TreeNode* root, TreeNode* node) {
-        if (!root)
-            return false;
-        if (root == node)
-            return true;
-        return hasNode(root->left, node) || hasNode(root->right, node);
-    }
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
-        if (!root)
-            return NULL;
-        if ((hasNode(root->left, p) || hasNode(root->right, p) || hasNode(root,p)) &&
-            (hasNode(root->left, q) || hasNode(root->right, q) || hasNode(root,q))) {
-            if (lowestCommonAncestor(root->left, p, q) == NULL &&
-                lowestCommonAncestor(root->right, p, q) == NULL) {
+        int small = min(p->val, q->val);
+        int large = max(p->val, q->val);
+        while (root != NULL) {
+            if (root->val > large)
+                root = root->left;
+            else if (root->val < small)
+                root = root->right;
+            else
                 return root;
-            } else {
-                return lowestCommonAncestor(root->left, p, q)
-                           ? lowestCommonAncestor(root->left, p, q)
-                           : lowestCommonAncestor(root->right, p, q);
-            }
         }
         return NULL;
     }
